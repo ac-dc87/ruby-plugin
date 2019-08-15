@@ -1,8 +1,6 @@
 # Ruby::Plugin
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ruby/plugin`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This code was built to support variety of connectors to support 3rd party integration interoperability for S6.
 
 ## Installation
 
@@ -22,17 +20,26 @@ Or install it yourself as:
 
 ## Usage
 
-You need to set AMQP_URL prior to be able to run the `bin/ruby-plugin` i.e AMQP_URL='amqp://guest:guest@localhost:5672'
+Plugin will let you know which environment variables you need to set in order to be able to run it. Here is sample environment configuration:
+
+    export AMQP_URL='amqp://guest:guest@localhost:5672'
+    export INTEGRATION='prism_edc'
+    export PRISM_TOOLKIT_URL='https://esource.nextrials.com/esource-toolkit'
+    export INTEGRATION_QUEUE_NAME='custom.nextrials.cprism'
+
+You can run the plugin using `bin/ruby-plugin` or using `foreman start`
 
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/ruby-plugin. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/ac-dc87/ruby-plugin. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+
+Put your Ruby code in the file `lib/ruby/plugin`. To experiment with that code, run `bin/console` for an interactive prompt.
 
 ## License
 
