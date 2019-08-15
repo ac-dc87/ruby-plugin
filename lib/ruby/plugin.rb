@@ -6,8 +6,7 @@ module Ruby
     INTEGRATIONS = {
       'prism_edc' => {
         klass: Ruby::Plugin::Integration::PrismEdc,
-        queue: 'custom.nextrials.cprism',
-        config_keys: %w[prism_toolkit_url]
+        config_keys: %w[prism_toolkit_url integration_queue_name]
       }
     }
     class Error < StandardError; end

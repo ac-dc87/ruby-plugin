@@ -28,9 +28,5 @@ Sneakers.configure  amqp: $config[:amqp_url],
 
 Sneakers.logger.level = Logger::INFO
 
-Ruby::Plugin::Worker.from_queue(
-  $config.dig(:integration, :queue)
-)
-
 runner = Sneakers::Runner.new([Ruby::Plugin::Worker])
 runner.run

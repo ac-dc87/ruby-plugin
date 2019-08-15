@@ -34,6 +34,8 @@ module Ruby
           #{missing_config_keys.join(', ')}
         } unless missing_config_keys.empty?
 
+        Ruby::Plugin::Worker.from_queue(ENV['INTEGRATION_QUEUE_NAME'])
+
         return integration
       end
     end
