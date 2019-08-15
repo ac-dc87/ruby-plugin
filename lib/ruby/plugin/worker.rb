@@ -9,12 +9,12 @@ module Ruby
 
       def work_with_params(msg, headers, props)
         logger.info "Processing message: #{msg} with headers: #{headers} and properties #{props}"
-        routing_key = props[:reply_to]
-        headers = {
-          amqp_correlationId: props[:message_id]
-        }
         begin
           publisher = Sneakers::Publisher.new
+          routing_key = props[:reply_to]
+          headers = {
+            amqp_correlationId: props[:message_id]
+          }
           integration_handler = Ruby::Plugin::HANDLERS.dig($config[:integration], :klass)
           response_object = integration_handler.process(msg)
         rescue Ruby::Plugin::CustomProcessingResponseException => err
@@ -29,7 +29,7 @@ module Ruby
             content_encoding: props[:content_encoding],
             headers: headers
           )
-          publisher.instance_variable_get(:@channel).close
+          publisher.instance_variable_get(:@bunny).stop
         end
         ack!
       end
