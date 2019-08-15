@@ -1,6 +1,6 @@
 module Ruby
   module Plugin
-    module Prism
+    module Integration
     end
   end
 end

@@ -4,19 +4,19 @@ module Ruby
       require 'sneakers'
       require 'pry-byebug'
       require 'json'
+      require 'ruby/plugin/message_handler'
 
       include Sneakers::Worker
 
       def work_with_params(msg, headers, props)
         logger.info "Processing message: #{msg} with headers: #{headers} and properties #{props}"
         begin
-          publisher = Sneakers::Publisher.new
+          publisher = Sneakers::Publisher.new # in case of trough-put issues, use connection pooling
           routing_key = props[:reply_to]
           headers = {
             amqp_correlationId: props[:message_id]
           }
-          integration_handler = Ruby::Plugin::HANDLERS.dig($config[:integration], :klass)
-          response_object = integration_handler.process(msg)
+          response_object = MessageHandler.handle(msg)
         rescue Ruby::Plugin::CustomProcessingResponseException => err
           routing_key = $config[:error_queue]
           response_object = err.queue_serializable_error

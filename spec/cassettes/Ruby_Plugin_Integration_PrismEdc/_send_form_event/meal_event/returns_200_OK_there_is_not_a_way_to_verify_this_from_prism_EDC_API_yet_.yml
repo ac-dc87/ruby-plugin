@@ -1,0 +1,43 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://esource.nextrials.com/esource-toolkit/rest/v1/custom/prism/add
+    body:
+      encoding: UTF-8
+      string: '{"formAbstractId":"3083372917","formFields":{"IT.109cdc9572cf3732a8024c1a69d06eff7bcc32a5":"12:12","IT.20f745f2240052fa6ae7b0631d3179a5ee6cd808":"BREAKFAST","IT.590f2722f3b1b05aa327654611621866d07e785f":"01
+        MAY 2019"}}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Date:
+      - Thu, 15 Aug 2019 15:42:31 GMT
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      X-Frame-Options:
+      - DENY
+      Connection:
+      - close
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - text/plain; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 15 Aug 2019 15:42:31 GMT
+recorded_with: VCR 5.0.0

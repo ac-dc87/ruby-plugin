@@ -1,12 +1,13 @@
 require 'ruby/plugin/version'
-require 'ruby/plugin/prism/edc'
+require 'ruby/plugin/integration/prism_edc'
 
 module Ruby
   module Plugin
-    HANDLERS = {
+    INTEGRATIONS = {
       'prism_edc' => {
-        klass: Ruby::Plugin::Prism::Edc,
-        queue: 'custom.nextrials.cprism'
+        klass: Ruby::Plugin::Integration::PrismEdc,
+        queue: 'custom.nextrials.cprism',
+        config_keys: %w[prism_toolkit_url]
       }
     }
     class Error < StandardError; end
