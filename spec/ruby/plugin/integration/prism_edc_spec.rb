@@ -1,9 +1,6 @@
 require 'ruby/plugin/integration/prism_edc'
 
 RSpec.describe Ruby::Plugin::Integration::PrismEdc do
-  # let!(:external_service_identifier) do
-  #   create(:external_service_identifier, site_member: site_member, provider_type: :prism_edc, extra_properties: { mealTimeFormId: '3083372917' } )
-  # end
   let(:request) { nil }
   before do
     Ruby::Plugin::Integration::PrismEdc.base_uri 'https://esource.nextrials.com/esource-toolkit'
