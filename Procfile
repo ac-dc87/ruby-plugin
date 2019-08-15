@@ -1,1 +1,1 @@
-ruby-plugin: bin/ruby-plugin
+ruby-plugin: bin/ruby-plugin.rb
