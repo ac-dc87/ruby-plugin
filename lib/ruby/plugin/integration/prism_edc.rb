@@ -1,31 +1,19 @@
 module Ruby
   module Plugin
     module Integration
+      require 'ruby/plugin/integration/base'
       # The class that actually interacts with the EDC
-      class PrismEdc
-        require 'pry-byebug'
-        require 'ruby/plugin'
-        require 'httparty'
-
-        include HTTParty
+      class PrismEdc < Base
         base_uri ENV['PRISM_TOOLKIT_URL']
+        logger ::Sneakers.logger, :info
         headers 'Content-Type' => 'application/json'
-
-        attr_reader :request_method, :data
 
         def self.call(*args)
           new(*args).call
         end
 
-        # @param request_method [Hash] Verb and action name
-        # @param request_body [Hash] Request body
-        def initialize(request)
-          @request_method = request[:method]
-          @data = request[:body]
-        end
-
         def call
-          response = send(request_method['action'], data)
+          response = send(action)
           if [200, 201].include? response.code
             return response.body.empty? ? 'OK' : response.body
           else
@@ -35,12 +23,16 @@ module Ruby
 
         private
 
-        def send_form_event(body)
-          self.class.post('/rest/v1/custom/prism/add', body: body.to_json) # could use request_method['name']
+        def send_form_event
+          self
+            .class
+            .send(verb, '/rest/v1/custom/nextrials.prism/add', body: data.to_json)
         end
 
-        def edit_event(body)
-          self.class.post('/rest/v1/custom/prism/edit', body: body.to_json) # could use request_method['name']
+        def edit_event
+          self
+            .class
+            .send(verb, '/rest/v1/custom/nextrials.prism/edit', body: data.to_json)
         end
       end
     end

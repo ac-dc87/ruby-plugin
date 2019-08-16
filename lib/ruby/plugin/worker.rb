@@ -4,7 +4,7 @@ module Ruby
       require 'sneakers'
       require 'pry-byebug'
       require 'json'
-      require 'ruby/plugin/message_handler'
+      require 'ruby/plugin/utils/message_handler'
 
       include Sneakers::Worker
 
@@ -16,7 +16,7 @@ module Ruby
           headers = {
             amqp_correlationId: props[:message_id]
           }
-          response_object = MessageHandler.handle(msg)
+          response_object = Ruby::Plugin::Utils::MessageHandler.handle(msg)
         rescue Ruby::Plugin::CustomProcessingResponseException => err
           routing_key = $config[:error_queue]
           response_object = err.queue_serializable_error

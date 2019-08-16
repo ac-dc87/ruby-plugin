@@ -6,7 +6,7 @@ module Ruby
     INTEGRATIONS = {
       'prism_edc' => {
         klass: Ruby::Plugin::Integration::PrismEdc,
-        config_keys: %w[prism_toolkit_url integration_queue_name]
+        config_keys: %w[prism_toolkit_url integration_queue_name integration_mapping_url]
       }
     }
     class Error < StandardError; end

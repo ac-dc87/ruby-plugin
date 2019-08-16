@@ -26,6 +26,7 @@ Plugin will let you know which environment variables you need to set in order to
     export INTEGRATION='prism_edc'
     export PRISM_TOOLKIT_URL='https://esource.nextrials.com/esource-toolkit'
     export INTEGRATION_QUEUE_NAME='custom.nextrials.cprism'
+    export INTEGRATION_MAPPING_URL='http://localhost:3000/mappings/ada18111-6073-4ebd-84b0-beff90851cf1'
 
 You can run the plugin using `bin/ruby-plugin` or using `foreman start`
 

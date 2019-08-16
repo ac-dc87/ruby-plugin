@@ -4,7 +4,7 @@ root = File.expand_path('../lib', File.dirname(__FILE__))
 $: << root
 require 'ruby/plugin'
 require 'ruby/plugin/worker'
-require 'ruby/plugin/config'
+require 'ruby/plugin/utils/config'
 require 'sneakers'
 require 'sneakers/runner'
 require 'sneakers/metrics/logging_metrics'
@@ -13,7 +13,7 @@ require 'logger'
 # https://github.com/jondot/sneakers/wiki/Configuration
 # we can implement autoscaling if need be
 
-$config = Ruby::Plugin::Config.validate_configuration
+$config = Ruby::Plugin::Utils::Config.validate_configuration
 
 Sneakers.configure  amqp: $config[:amqp_url],
                     threads: $config[:consumer_threads], # Threadpool size (good to match prefetch)
