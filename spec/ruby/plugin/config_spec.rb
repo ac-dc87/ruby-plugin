@@ -1,5 +1,5 @@
-require 'ruby/plugin/config'
+require 'ruby/plugin/utils/config'
 
-RSpec.describe Ruby::Plugin::Config do
+RSpec.describe Ruby::Plugin::Utils::Config do
   # body
 end

@@ -1,6 +1,6 @@
 module Ruby
   module Plugin
-    module Integration
+    module Integrations
     end
   end
 end

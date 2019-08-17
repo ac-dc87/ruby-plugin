@@ -1,11 +1,10 @@
 module Ruby
   module Plugin
-    module Integration
-      # Base integration class that provides functionality shared among integrations
+    module Integrations
+      # Base class that provides functionality shared among integrations
       class Base
         require 'pry-byebug'
         require 'ruby/plugin'
-        require 'sneakers'
         require 'httparty'
 
         include HTTParty
@@ -20,6 +19,8 @@ module Ruby
           @data = apply_mappings(request[:body])
           @original_payload = request[:original_payload]
         end
+
+        private
 
         def apply_mappings(body)
           {}.tap do |hash|

@@ -1,11 +1,11 @@
 require 'ruby/plugin/version'
-require 'ruby/plugin/integration/prism_edc'
+require 'ruby/plugin/integrations/prism_edc'
 
 module Ruby
   module Plugin
     INTEGRATIONS = {
       'prism_edc' => {
-        klass: Ruby::Plugin::Integration::PrismEdc,
+        klass: Ruby::Plugin::Integrations::PrismEdc,
         config_keys: %w[prism_toolkit_url integration_queue_name integration_mapping_url]
       }
     }

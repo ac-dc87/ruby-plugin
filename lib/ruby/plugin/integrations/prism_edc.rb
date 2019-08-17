@@ -1,9 +1,11 @@
 module Ruby
   module Plugin
-    module Integration
-      require 'ruby/plugin/integration/base'
+    module Integrations
+      require 'ruby/plugin/integrations/base'
       # The class that actually interacts with the EDC
       class PrismEdc < Base
+        require 'sneakers'
+
         base_uri ENV['PRISM_TOOLKIT_URL']
         logger ::Sneakers.logger, :info
         headers 'Content-Type' => 'application/json'
