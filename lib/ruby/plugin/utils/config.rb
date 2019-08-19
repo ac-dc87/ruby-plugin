@@ -33,7 +33,7 @@ module Ruby
             Possible values are #{Ruby::Plugin::INTEGRATIONS.keys}
           ) if integration.nil? || integration.empty?
 
-          valudate_integration_configuration_keys(integration)
+          validate_integration_configuration_keys(integration)
 
           queue_name = ENV['INTEGRATION_QUEUE_NAME']
           raise 'Environment variable INTEGRATION_QUEUE_NAME needs to be set' if queue_name.nil? || queue_name.strip.empty?
@@ -43,7 +43,7 @@ module Ruby
           return integration
         end
 
-        def self.valudate_integration_configuration_keys(integration)
+        def self.validate_integration_configuration_keys(integration)
           return unless integration[:config_keys]
           missing_config_keys = integration[:config_keys].reject { |key| ENV.key?(key.upcase) }.map(&:upcase)
 
