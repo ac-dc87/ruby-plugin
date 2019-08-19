@@ -9,15 +9,14 @@ module Ruby
 
         include HTTParty
 
-        attr_reader :action, :data, :verb, :original_payload
+        attr_reader :action, :data, :verb, :message_properties
 
         # @param request [Hash] everything needed to assemble the request including the original message
-        # TODO get headers if we need them
         def initialize(request)
           @action = request[:action]
           @verb = request[:verb].downcase
           @data = apply_mappings(request[:body])
-          @original_payload = request[:original_payload]
+          @message_properties = request[:message_properties]
         end
 
         private

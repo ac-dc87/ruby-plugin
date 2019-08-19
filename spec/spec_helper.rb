@@ -1,9 +1,11 @@
 require 'bundler/setup'
 require 'ruby/plugin'
+require 'ruby/plugin/worker'
 require 'pry-byebug'
 # HTTP Request recording
 require 'vcr'
 require 'webmock/rspec'
+require_relative 'sneakers_helpers'
 
 VCR.configure do |c|
   # this line is important so that only those specs with the "vcr" metadata are mocked instead
@@ -20,6 +22,18 @@ VCR.configure do |c|
 end
 
 RSpec.configure do |config|
+  config.include WorkerAdditions
+  config.include Sneakers::Testing
+
+  config.before(:each) do
+    Sneakers::Testing.clear_all
+  end
+
+  config.around(:each, fake_publisher: true) do |example|
+    Ruby::Plugin::Worker.include(WorkerAdditions)
+    example.run
+  end
+
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = ".rspec_status"
 

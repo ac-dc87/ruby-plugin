@@ -3,19 +3,18 @@ module Ruby
     class Worker
       require 'sneakers'
       require 'pry-byebug'
-      require 'json'
       require 'ruby/plugin/utils/message_handler'
 
       include Sneakers::Worker
 
-      def work_with_params(msg, headers, props)
-        logger.info "Processing message: #{msg} with headers: #{headers} and properties #{props}"
+      def work_with_params(msg, _delivery_info, props)
+        logger&.info "PROCESSING MESSAGE: #{msg}\nWITH THESE PROPERTIES: #{props}"
         begin
           routing_key = props[:reply_to]
           headers = {
             amqp_correlationId: props[:message_id]
           }
-          response_object = Ruby::Plugin::Utils::MessageHandler.handle(msg)
+          response_object = Ruby::Plugin::Utils::MessageHandler.handle(msg, props)
         rescue Ruby::Plugin::CustomProcessingResponseException => err
           routing_key = $config[:error_queue]
           response_object = err.queue_serializable_error

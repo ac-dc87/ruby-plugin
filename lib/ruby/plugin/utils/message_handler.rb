@@ -18,15 +18,17 @@ module Ruby
           JSON::ParserError
         ].freeze
 
-        attr_reader :message
+        attr_reader :message, :properties
 
         def self.handle(*args)
           new(*args).handle
         end
 
-        # @param message [String] rabbitMQ message
-        def initialize(message)
+        # @param message [String] rabbitMQ message. Toolkit headers are a part of this
+        # @param properties [Hash] rabbitMQ message properties
+        def initialize(message, properties)
           @message = message
+          @properties = @properties
         end
 
         def handle
@@ -48,7 +50,7 @@ module Ruby
         def request
           msg = JSON.parse(message)
           {
-            original_payload: msg,
+            message_properties: properties,
             action: QueryParamParser.action(msg),
             verb: msg.dig('sourceBean', 'requestMethod'),
             body: JSON.parse(msg['message'])
