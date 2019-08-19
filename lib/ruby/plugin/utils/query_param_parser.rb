@@ -7,7 +7,7 @@ module Ruby
 
         def self.action(msg)
           url = msg.dig('sourceBean', 'requestPath')
-          return if url&.empty?
+          return if url.nil? || url.strip.empty?
 
           CGI::parse(URI.parse(url).query).fetch('action', []).first
         end

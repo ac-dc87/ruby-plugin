@@ -6,7 +6,9 @@ module Ruby
         require 'open-uri'
 
         def self.parse
-          JSON.load(open(ENV['INTEGRATION_MAPPING_URL']))
+          mapping_url = ENV['INTEGRATION_MAPPING_URL']
+          return {} if mapping_url.nil? || mapping_url.strip.empty?
+          JSON.load(open(mapping_url))
         end
       end
     end

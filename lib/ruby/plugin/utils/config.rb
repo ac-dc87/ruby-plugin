@@ -5,10 +5,11 @@ module Ruby
       # building configuration object from environment
       class Config
         require 'ruby/plugin/utils/mapping_parser'
+        require 'ruby/plugin/worker'
 
         def self.validate_configuration
           amqp_url = ENV['AMQP_URL']
-          raise 'Environment variable AMQP_URL needs to be set' unless amqp_url
+          raise 'Environment variable AMQP_URL needs to be set' if amqp_url.nil? || amqp_url.strip.empty?
           consumer_threads = ENV['CONSUMER_THREADS'] ? ENV['CONSUMER_THREADS'].to_i : 10
           consumer_workers = ENV['CONSUMER_WORKERS'] ? ENV['CONSUMER_WORKERS'].to_i : 3
           log_output = ENV['LOG_FILE'] || STDOUT
@@ -26,12 +27,24 @@ module Ruby
 
         def self.validate_integration_configuration
           integration = Ruby::Plugin::INTEGRATIONS.fetch(ENV['INTEGRATION'], nil)
-          raise %{
+          integration = integration.strip if integration.respond_to?(:strip)
+          raise %(
             Environment variable INTEGRATION needs to be set
             Possible values are #{Ruby::Plugin::INTEGRATIONS.keys}
-          } unless integration
+          ) if integration.nil? || integration.empty?
 
-          #check for empty values
+          valudate_integration_configuration_keys(integration)
+
+          queue_name = ENV['INTEGRATION_QUEUE_NAME']
+          raise 'Environment variable INTEGRATION_QUEUE_NAME needs to be set' if queue_name.nil? || queue_name.strip.empty?
+
+          Ruby::Plugin::Worker.from_queue(queue_name)
+
+          return integration
+        end
+
+        def self.valudate_integration_configuration_keys(integration)
+          return unless integration[:config_keys]
           missing_config_keys = integration[:config_keys].reject { |key| ENV.key?(key.upcase) }.map(&:upcase)
 
           raise %{
@@ -39,9 +52,12 @@ module Ruby
             #{missing_config_keys.join(', ')}
           } unless missing_config_keys.empty?
 
-          Ruby::Plugin::Worker.from_queue(ENV['INTEGRATION_QUEUE_NAME'])
+          blank_config_keys = integration[:config_keys].select{ |key| ENV[key.upcase].strip.empty? }.map(&:upcase)
 
-          return integration
+          raise %{
+            Following environment variables cannot be empty/blank:
+            #{blank_config_keys.join(', ')}
+          } unless blank_config_keys.empty?
         end
       end
     end
