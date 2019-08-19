@@ -11,7 +11,6 @@ module Ruby
       def work_with_params(msg, headers, props)
         logger.info "Processing message: #{msg} with headers: #{headers} and properties #{props}"
         begin
-          publisher = Sneakers::Publisher.new # in case of trough-put issues, use connection pooling
           routing_key = props[:reply_to]
           headers = {
             amqp_correlationId: props[:message_id]
@@ -22,14 +21,13 @@ module Ruby
           response_object = err.queue_serializable_error
           headers['__TypeId__'] = 'com.prahs.esource.exception.process.CustomProcessingResponseException'
         ensure
-          publisher.publish(
+          publish(
             response_object.to_json,
             routing_key: routing_key,
             content_type: props[:content_type],
             content_encoding: props[:content_encoding],
             headers: headers
           )
-          publisher.instance_variable_get(:@bunny).stop
         end
         ack!
       end
