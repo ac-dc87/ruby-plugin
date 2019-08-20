@@ -18,6 +18,16 @@ module Ruby
           response = send(action)
           if [200, 201].include? response.code
             return response.body.empty? ? 'OK' : response.body
+          elsif response.code == 400
+            raise Ruby::Plugin::RequestError.new(
+              'Bad or malformed request',
+              'BAD_REQUEST'
+            )
+          elsif response.code == 404
+            raise Ruby::Plugin::RequestError.new(
+              'Resource not found',
+              'NOT_FOUND'
+            )
           else
             raise "http_status=#{response.code} body=#{response.body}"
           end

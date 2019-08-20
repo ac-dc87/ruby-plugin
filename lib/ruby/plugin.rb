@@ -10,6 +10,13 @@ module Ruby
       }
     }
     class Error < StandardError; end
+    class RequestError < Error
+      attr_reader :message, :http_status
+      def initialize(message, http_status)
+        @message = message
+        @http_status = http_status
+      end
+    end
     class CustomProcessingResponseException < Error
       attr_reader :local_message, :http_status,
                   :profile, :message, :localized_message

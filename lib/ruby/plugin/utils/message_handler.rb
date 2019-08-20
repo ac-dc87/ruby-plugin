@@ -38,6 +38,11 @@ module Ruby
             err.message,
             'UNPROCESSABLE_ENTITY'
           )
+        rescue Ruby::Plugin::RequestError => err
+          raise Ruby::Plugin::CustomProcessingResponseException.new(
+            err.message,
+            err.http_status
+          )
         rescue StandardError => err
           raise Ruby::Plugin::CustomProcessingResponseException.new(
             err.message,

@@ -19,6 +19,8 @@ module Ruby
           @message_properties = request[:message_properties]
         end
 
+        # TODO push call upwards and do request level logging here
+
         private
 
         def apply_mappings(body)
