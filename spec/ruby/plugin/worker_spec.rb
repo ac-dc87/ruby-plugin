@@ -22,7 +22,8 @@ RSpec.describe Ruby::Plugin::Worker do
       let(:unpredicted_error) { 'Something went horribly wrong' }
       before do
         allow(Ruby::Plugin::Utils::MessageHandler)
-          .to receive(:handle).with({}, rabbitmq_props)
+          .to receive(:handle)
+          .with({}, rabbitmq_props)
           .and_raise(
             Ruby::Plugin::CustomProcessingResponseException.new(
               unpredicted_error,

@@ -24,11 +24,11 @@ module Ruby
           new(*args).handle
         end
 
-        # @param message [String] rabbitMQ message. Toolkit headers are a part of this
+        # @param message Json [String] rabbitMQ message. Toolkit headers are a part of this
         # @param properties [Hash] rabbitMQ message properties
         def initialize(message, properties)
           @message = message
-          @properties = @properties
+          @properties = properties
         end
 
         def handle
@@ -49,11 +49,13 @@ module Ruby
 
         def request
           msg = JSON.parse(message)
+          request_method = msg.dig('sourceBean', 'requestMethod')
+          body = request_method == 'GET' ? {} : JSON.parse(msg['message'])
           {
             message_properties: properties,
             action: QueryParamParser.action(msg),
-            verb: msg.dig('sourceBean', 'requestMethod'),
-            body: JSON.parse(msg['message'])
+            verb: request_method,
+            body: body
           }
         end
       end
