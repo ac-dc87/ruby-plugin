@@ -20,8 +20,36 @@ module Ruby
         end
 
         # TODO push call upwards and do request level logging here
+        # using sneakers logger
 
         private
+
+        def call
+          response = send(action)
+          with_transmission_log(request_body: data&.to_json, response_body: response.body) do
+            if [200, 201].include? response.code
+              return response.body.empty? ? 'OK' : response.body
+            elsif response.code == 400
+              raise Ruby::Plugin::RequestError.new(
+                'Bad or malformed request',
+                'BAD_REQUEST'
+              )
+            elsif response.code == 404
+              raise Ruby::Plugin::RequestError.new(
+                'Resource not found',
+                'NOT_FOUND'
+              )
+            else
+              raise "http_status=#{response.code} body=#{response.body}"
+            end
+          end
+        end
+
+        def with_transmission_log(request_body:, response_body:)
+          puts "Executing action: #{action} with body: #{request_body}"
+          puts "Done with action: #{action} with response: #{response_body}"
+          yield
+        end
 
         def apply_mappings(body)
           {}.tap do |hash|
