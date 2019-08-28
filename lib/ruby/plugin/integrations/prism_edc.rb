@@ -16,6 +16,12 @@ module Ruby
 
         private
 
+        def enroll_subject
+          self
+            .class
+            .send(verb, '/rest/v1/custom/nextrials.prism/enroll', body: data.to_json)
+        end
+
         def send_form_event
           self
             .class

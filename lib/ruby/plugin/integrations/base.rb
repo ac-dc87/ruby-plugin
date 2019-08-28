@@ -19,11 +19,6 @@ module Ruby
           @message_properties = request[:message_properties]
         end
 
-        # TODO push call upwards and do request level logging here
-        # using sneakers logger
-
-        private
-
         def call
           response = send(action)
           with_transmission_log(request_body: data&.to_json, response_body: response.body) do
@@ -44,6 +39,11 @@ module Ruby
             end
           end
         end
+
+        # TODO push call upwards and do request level logging here
+        # using sneakers logger
+
+        private
 
         def with_transmission_log(request_body:, response_body:)
           puts "Executing action: #{action} with body: #{request_body}"

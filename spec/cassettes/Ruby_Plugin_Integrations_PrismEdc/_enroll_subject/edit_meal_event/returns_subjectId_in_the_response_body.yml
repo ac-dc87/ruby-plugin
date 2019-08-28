@@ -1,0 +1,42 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://esource.nextrials.com/esource-toolkit/rest/v1/custom/nextrials.prism/enroll
+    body:
+      encoding: UTF-8
+      string: '{"ntiCode":"demo008","firstName":"Test1","lastName":"Subject2","orgId":"2890682056","dateOfBirth":"1987-02-02","gender":"0"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Date:
+      - Wed, 28 Aug 2019 14:42:16 GMT
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      X-Frame-Options:
+      - DENY
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '26'
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"subjectId":"3163605005"}'
+    http_version: 
+  recorded_at: Wed, 28 Aug 2019 14:42:16 GMT
+recorded_with: VCR 5.0.0
