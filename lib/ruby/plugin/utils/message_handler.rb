@@ -56,11 +56,13 @@ module Ruby
           msg = JSON.parse(message)
           request_method = msg.dig('sourceBean', 'requestMethod')
           body = request_method == 'GET' ? {} : JSON.parse(msg['message'])
+          params = QueryParamParser.params(msg)
           {
             message_properties: properties,
-            action: QueryParamParser.action(msg),
+            action: params['action'],
             verb: request_method,
-            body: body
+            body: body,
+            params: params
           }
         end
       end

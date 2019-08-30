@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ODM CreationDateTime="<%= creation_time %>" FileOID="<%= file_oid %>" FileType="Transactional" ODMVersion="1.3" Originator="Parallel6 Clinical6 Prototype" xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:mdsol="http://www.mdsol.com/ns/odm/metadata">
+  <ClinicalData MetaDataVersionOID="1" StudyOID="<%= study_oid %>">
+    <SubjectData SubjectKey="<%= subject_name %>" TransactionType="Update" mdsol:SubjectKeyType="SubjectName">
+      <SiteRef LocationOID="<%= location_oid %>" />
+      <StudyEventData StudyEventOID="<%= study_event_oid %>" TransactionType="Update" StudyEventRepeatKey="1">
+        <FormData FormOID="<%= form_oid %>" FormRepeatKey="<%= form_repeat_key %>" TransactionType="<%= form_transaction_type %>">
+          <% item_group_data.each do |item_group_datum| %>
+            <% item_group_repeat_key = item_group_datum[:item_group_repeat_key] || item_group_datum[:item_group_oid] %>
+            <% tt = item_group_datum[:item_group_transaction_type] %>
+            <ItemGroupData ItemGroupOID="<%= item_group_datum[:item_group_oid] %>" ItemGroupRepeatKey="<%= item_group_repeat_key %>"<% if tt.present? %> TransactionType="<%= tt %>"<% end %> mdsol:Submission="SpecifiedItemsOnly" >
+              <% item_group_datum[:form_items].each do |item| %>
+                <% if item[:value] %>
+                  <ItemData ItemOID="<%= item[:oid] %>" Value="<%= item[:value] %>" <% if item[:context] %> TransactionType = "Context" <% end %>/>
+                <% else %>
+                  <ItemData ItemOID="<%= item[:oid] %>" IsNull="Yes" />
+                <% end %>
+              <% end %>
+            </ItemGroupData>
+          <% end %>
+        </FormData>
+      </StudyEventData>
+    </SubjectData>
+  </ClinicalData>
+</ODM>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ODM CreationDateTime="<%= creation_time %>" FileOID="<%= file_oid %>" FileType="Transactional" ODMVersion="1.3" Originator="PRA Integration Engine" xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:mdsol="http://www.mdsol.com/ns/odm/metadata">
+    <ClinicalData MetaDataVersionOID="1" StudyOID="<%= study_oid %>">
+        <SubjectData SubjectKey="<%= subject_id %>" TransactionType="<%= subject_data_transaction_type %>">
+            <SiteRef LocationOID="<%= location_oid %>" />
+            <StudyEventData StudyEventOID="<%= study_event_oid %>" TransactionType="Update">
+                <FormData FormOID="<%= form_oid %>" TransactionType="Update">
+                    <ItemGroupData ItemGroupOID="<%= item_group_oid %>">
+                    <% form_items.each do |item| %>
+                      <ItemData ItemOID="<%= item['oid'] %>" Value="<%= item['value'] %>" />
+                    <% end %>
+                    </ItemGroupData>
+                </FormData>
+            </StudyEventData>
+        </SubjectData>
+    </ClinicalData>
+</ODM>

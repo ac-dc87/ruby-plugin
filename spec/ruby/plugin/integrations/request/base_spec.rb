@@ -1,6 +1,6 @@
-require 'ruby/plugin/integrations/base'
+require 'ruby/plugin/integrations/request/base'
 
-RSpec.describe Ruby::Plugin::Integrations::Base do
+RSpec.describe Ruby::Plugin::Integrations::Request::Base do
   before do
     $config = {
       mapping: {
@@ -49,7 +49,7 @@ RSpec.describe Ruby::Plugin::Integrations::Base do
       }
     end
 
-    subject { Ruby::Plugin::Integrations::Base.new(request).data }
+    subject { Ruby::Plugin::Integrations::Request::Base.new(request).data }
 
     it 'after object is created, keys converted (on any hash level) using mappings' do
       expect(subject).to eq(expected_body)

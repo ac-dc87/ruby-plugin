@@ -1,7 +1,7 @@
-require 'ruby/plugin/integrations/prism_edc'
+require 'ruby/plugin/integrations/prism_edc/request'
 require 'json'
 
-RSpec.describe Ruby::Plugin::Integrations::PrismEdc do
+RSpec.describe Ruby::Plugin::Integrations::PrismEdc::Request do
   let(:request) { nil }
   before do
     # Simulating mapping not provided
@@ -10,7 +10,7 @@ RSpec.describe Ruby::Plugin::Integrations::PrismEdc do
         'data' => {}
       }
     }
-    Ruby::Plugin::Integrations::PrismEdc.base_uri 'https://esource.nextrials.com/esource-toolkit'
+    Ruby::Plugin::Integrations::PrismEdc::Request.base_uri 'https://esource.nextrials.com/esource-toolkit'
   end
   subject { described_class.call(request) }
 
