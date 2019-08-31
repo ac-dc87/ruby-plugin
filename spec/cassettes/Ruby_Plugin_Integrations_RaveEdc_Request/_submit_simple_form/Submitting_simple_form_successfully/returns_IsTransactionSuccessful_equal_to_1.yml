@@ -5,17 +5,17 @@ http_interactions:
     uri: https://pra.mdsol.com/RaveWebServices/webservice.aspx?PostODMClinicalData
     body:
       encoding: UTF-8
-      string: "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n<ODM CreationDateTime=\"2019-08-31T15:51:04\"
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n<ODM CreationDateTime=\"2019-08-31T15:56:36\"
         FileOID=\"b510b43f-1bac-4945-80b3-843852031b73\" FileType=\"Transactional\"
         ODMVersion=\"1.3\" Originator=\"PRA Integration Engine\" xmlns=\"http://www.cdisc.org/ns/odm/v1.3\"
         xmlns:mdsol=\"http://www.mdsol.com/ns/odm/metadata\">\n    <ClinicalData MetaDataVersionOID=\"1\"
-        StudyOID=\"Clinical 6 Testing (DEV)\">\n        <SubjectData SubjectKey=\"9998\"
+        StudyOID=\"Clinical 6 Testing (DEV)\">\n        <SubjectData SubjectKey=\"9996\"
         TransactionType=\"Insert\">\n            <SiteRef LocationOID=\"666666\" />\n
         \           <StudyEventData StudyEventOID=\"SUBJECT\" TransactionType=\"Update\">\n
         \               <FormData FormOID=\"SUBJ\" TransactionType=\"Update\">\n                    <ItemGroupData
         ItemGroupOID=\"SUBJ\">\n                    \n                      <ItemData
-        ItemOID=\"SITEID\" Value=\"9998\" />\n                    \n                      <ItemData
-        ItemOID=\"SUBJID\" Value=\"666666\" />\n                    \n                    </ItemGroupData>\n
+        ItemOID=\"SITEID\" Value=\"666666\" />\n                    \n                      <ItemData
+        ItemOID=\"SUBJID\" Value=\"9996\" />\n                    \n                    </ItemGroupData>\n
         \               </FormData>\n            </StudyEventData>\n        </SubjectData>\n
         \   </ClinicalData>\n</ODM>\n"
     headers:
@@ -51,20 +51,20 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       Date:
-      - Sat, 31 Aug 2019 15:51:08 GMT
+      - Sat, 31 Aug 2019 15:56:39 GMT
       Content-Length:
-      - '494'
+      - '496'
       Set-Cookie:
-      - MedidataRave=!hdg5FWJ5UIiOHLhZPK4Sc85XtfOQzRQW9xzwkF6JCENc+3Tf9zIQ+qPH6A0ZGwSWv50B7jJUasV/NSU=;
+      - MedidataRave=!yMEU1YNJs4cWqmRZPK4Sc85XtfOQzWDs+7TtoF5aIPVAyzNtx2+eJxqkUTJgflTUQJytzktfxX5w008=;
         path=/; Httponly; Secure
     body:
       encoding: UTF-8
-      string: "<Response \n                                 ReferenceNumber=\"53002008-b449-4ef5-8608-693464b7a17d\"\n
+      string: "<Response \n                                 ReferenceNumber=\"a61ec2e2-25d3-4310-b9c9-a128591f9a04\"\n
         \                                InboundODMFileOID=\"b510b43f-1bac-4945-80b3-843852031b73\"
         \n                                 IsTransactionSuccessful = \"1\"\n                                 SuccessStatistics=\"Rave
         objects touched: Subjects=1; Folders=0; Forms=0; Fields=2; LogLines=0\" \n
-        \                                NewRecords=\"\" SubjectNumberInStudy=\"8\"
-        SubjectNumberInStudySite=\"8\"></Response>"
+        \                                NewRecords=\"\" SubjectNumberInStudy=\"10\"
+        SubjectNumberInStudySite=\"10\"></Response>"
     http_version: 
-  recorded_at: Sat, 31 Aug 2019 15:51:07 GMT
+  recorded_at: Sat, 31 Aug 2019 15:56:39 GMT
 recorded_with: VCR 5.0.0

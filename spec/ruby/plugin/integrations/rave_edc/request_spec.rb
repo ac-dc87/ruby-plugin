@@ -33,8 +33,8 @@ RSpec.describe Ruby::Plugin::Integrations::RaveEdc::Request do
         verb: 'POST',
         body: {
           'form_items' => {
-            'site_id' => '9998',
-            'account_name' => '666666'
+            'site_id' => '666666',
+            'account_name' => '9996'
           }
         },
         original_payload: {},
@@ -43,7 +43,7 @@ RSpec.describe Ruby::Plugin::Integrations::RaveEdc::Request do
           'study_event' => 'SUBJECT',
           'form_id' => 'SUBJ',
           'subject_data_transaction_type' => 'Insert',
-          'subject_id' => '9998'
+          'subject_id' => '9996'
         }
       }
     end
