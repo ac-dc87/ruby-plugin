@@ -37,7 +37,7 @@ module Ruby
             file_oid = SecureRandom.uuid
             item_group_oid = params.fetch('form_id')
             form_oid = item_group_oid
-            form_items = data['form_items']
+            form_items = data['form_items'].map{ |key, value| { 'oid' => key, 'value' => value } }
             subject_data_transaction_type = params.fetch('subject_data_transaction_type', 'Update')
             creation_time = Time.now.utc.strftime('%FT%T')
             template = ERB.new(
@@ -50,7 +50,6 @@ module Ruby
 
           def subject_data
             subject_id = params['subject_id']
-            ret = {}
             request_url = "/studies/#{STUDY_OID}/subjects/#{subject_id}/datasets/regular".gsub(' ', '%20')
             self.class.send(verb,request_url)
           end
