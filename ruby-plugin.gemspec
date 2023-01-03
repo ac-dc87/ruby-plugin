@@ -32,5 +32,5 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "foreman"
   spec.add_runtime_dependency "sneakers"
-  spec.add_runtime_dependency "httparty", '~> 0.13.5'
+  spec.add_runtime_dependency "httparty", '>= 0.13.5', '< 0.22.0'
 end
